@@ -34,6 +34,7 @@ def run(update, init=None, on_exit=None):
                     gc.collect()
                     return result
                 display.update()
+                gc.collect()
         finally:
             if on_exit:
                 on_exit()
