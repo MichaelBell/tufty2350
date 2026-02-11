@@ -697,6 +697,12 @@ PNG_STATIC int DecodePNG(PNGIMAGE *pPage, void *pUser, int iOptions)
     while (!bDone)
     {
         iLen = MOTOLONG(&s[iOffset]); // chunk length
+        if (iLen == 0) {
+            // Probably fine?
+            y = pPage->iHeight;
+            bDone = TRUE;
+            break;
+        }
         if (iLen < 0 || iLen + (iFileOffset - iBytesRead) > pPage->PNGFile.iSize) // invalid data
         {
             pPage->iError = PNG_DECODE_ERROR;
